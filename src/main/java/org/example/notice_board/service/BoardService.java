@@ -20,4 +20,14 @@ public class BoardService {
         boardDao.insertOne(boardDto);
         return boardDto;
     }
+
+    public BoardDto updateBoard(BoardDto boardDto) {
+        boardDao.updateOne(boardDto);
+        return boardDto;
+    }
+
+    public String deleteBoard(String boardId) {
+        boardDao.deleteBoard(boardId);
+        return boardId;
+    }
 }

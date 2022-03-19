@@ -15,4 +15,14 @@
         select * from board;
     </select>
 
+    <update id="updateBoardOne">
+        update board set title=#{title}, description=#{description}
+        where id=#{id}
+    </update>
+
+    <update id="deleteBoardOne">
+        update board set deleted=true
+        where id=#{boardId}
+    </update>
+
 </mapper>

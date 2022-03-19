@@ -21,7 +21,16 @@ public class BoardDaoImpl implements BoardDao {
 
     @Override
     public List<BoardDto> selectAll() {
-        List<BoardDto> result = sqlSession.selectList(namespace + ".selectBoards");
-        return result;
+        return sqlSession.selectList(namespace + ".selectBoards");
+    }
+
+    @Override
+    public void updateOne(BoardDto boardDto) {
+        sqlSession.update(namespace + ".updateBoardOne", boardDto);
+    }
+
+    @Override
+    public void deleteBoard(String boardId) {
+        sqlSession.update(namespace + ".deleteBoardOne", boardId);
     }
 }

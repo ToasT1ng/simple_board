@@ -14,14 +14,23 @@ import java.util.List;
 public class RestController {
     private final BoardService boardService;
 
-    //, consumes = MediaType.APPLICATION_JSON_VALUE, headers = {"Accept=application/json"}
     @PostMapping(value = "/setBoard")
     public @ResponseBody BoardDto setBoard(@RequestBody BoardDto boardDto) {
         return boardService.setBoard(boardDto);
     }
 
+    @PutMapping(value = "/updateBoard")
+    public @ResponseBody BoardDto updateBoard(@RequestBody BoardDto boardDto) {
+        return boardService.updateBoard(boardDto);
+    }
+
     @GetMapping("/getBoards")
     public @ResponseBody List<BoardDto> getBoards() {
         return boardService.getBoards();
+    }
+
+    @PutMapping(value = "/deleteBoard/{boardId}")
+    public @ResponseBody String deleteBoard(@PathVariable String boardId) {
+        return boardService.deleteBoard(boardId);
     }
 }
