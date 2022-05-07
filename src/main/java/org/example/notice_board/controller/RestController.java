@@ -3,34 +3,36 @@ package org.example.notice_board.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.notice_board.dto.BoardDto;
 import org.example.notice_board.service.BoardService;
+import org.example.notice_board.vo.BoardVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/board")
 @RequiredArgsConstructor
 public class RestController {
     private final BoardService boardService;
 
-    @PostMapping(value = "/setBoard")
-    public @ResponseBody BoardDto setBoard(@RequestBody BoardDto boardDto) {
-        return boardService.setBoard(boardDto);
+    @PostMapping(value = "/board/{boardId}")
+    public @ResponseBody Long setBoard(@PathVariable long boardId, @RequestBody BoardVO boardVO) {
+        return boardService.setBoard(boardId, boardVO);
     }
 
-    @PutMapping(value = "/updateBoard")
-    public @ResponseBody BoardDto updateBoard(@RequestBody BoardDto boardDto) {
-        return boardService.updateBoard(boardDto);
+    @PutMapping(value = "/board/{boardId}")
+    public @ResponseBody Long updateBoard(@PathVariable long boardId, @RequestBody BoardVO boardVO) {
+        return boardService.updateBoard(boardId, boardVO);
     }
 
-    @GetMapping("/getBoards")
+    @GetMapping("/board")
     public @ResponseBody List<BoardDto> getBoards() {
         return boardService.getBoards();
     }
 
-    @PutMapping(value = "/deleteBoard/{boardId}")
-    public @ResponseBody String deleteBoard(@PathVariable String boardId) {
-        return boardService.deleteBoard(boardId);
+    @DeleteMapping(value = "/board/{boardId}")
+    public @ResponseBody Long deleteBoard(@PathVariable long boardId) {
+        boardService.deleteBoard(boardId);
+        //TODO change this
+        return boardId;
     }
 }
