@@ -11,12 +11,12 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class RestController {
+public class BoardController {
     private final BoardService boardService;
 
-    @PostMapping(value = "/board/{boardId}")
-    public @ResponseBody Long setBoard(@PathVariable long boardId, @RequestBody BoardVO boardVO) {
-        return boardService.setBoard(boardId, boardVO);
+    @PostMapping(value = "/board")
+    public @ResponseBody Long setBoard(@RequestBody BoardVO boardVO) {
+        return boardService.setBoard(boardVO);
     }
 
     @PutMapping(value = "/board/{boardId}")
@@ -29,10 +29,13 @@ public class RestController {
         return boardService.getBoards();
     }
 
+    @GetMapping("/board/{boardId}")
+    public @ResponseBody BoardDto getBoard(@PathVariable long boardId) {
+        return boardService.getBoard(boardId);
+    }
+
     @DeleteMapping(value = "/board/{boardId}")
     public @ResponseBody Long deleteBoard(@PathVariable long boardId) {
-        boardService.deleteBoard(boardId);
-        //TODO change this
-        return boardId;
+        return boardService.deleteBoard(boardId);
     }
 }

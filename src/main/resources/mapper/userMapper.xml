@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.notice_board.UserMapper">
+    <resultMap type="UserDto" id="userResultMap">
+        <result property="userId" column="user_id"/>
+        <result property="userLevel" column="user_level"/>
+    </resultMap>
+
+    <insert id="insertUserOne">
+        insert into user(user_id,password,nickname,user_level) values
+        (#{userId},#{password},#{nickname},#{userLevel})
+    </insert>
+
+    <select id="selectUsers" resultType="UserDto" resultMap="userResultMap">
+        select * from user;
+    </select>
+
+    <select id="selectUser" resultType="UserDto" resultMap="userResultMap">
+        select * from user
+        where user_id=#{userId};
+    </select>
+
+    <update id="updateUserOne">
+        update user set password=#{password}, nickname=#{nickname}
+        where user_id=#{userId}
+    </update>
+
+    <delete id="deleteUserOne">
+        delete from user
+        where user_id=#{userId}
+    </delete>
+
+</mapper>

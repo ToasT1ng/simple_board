@@ -5,5 +5,7 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="BoardDto" type="org.example.notice_board.dto.BoardDto" />
+        <typeAlias alias="CategoryDto" type="org.example.notice_board.dto.CategoryDto" />
+        <typeAlias alias="UserDto" type="org.example.notice_board.dto.UserDto" />
     </typeAliases>
 </configuration>

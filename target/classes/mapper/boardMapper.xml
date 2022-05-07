@@ -5,24 +5,37 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.example.notice_board.BoardMapper">
+    <resultMap type="BoardDto" id="boardResultMap">
+        <result property="boardId" column="board_id"/>
+        <result property="boardNumber" column="board_number"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="noticeLevel" column="notice_level"/>
+    </resultMap>
 
     <insert id="insertBoardOne">
-        insert into board(id,title,description,deleted) values
-        (#{id},#{title},#{description},#{deleted})
+        insert into board(board_id,title,content,category_id,user_id,notice_level) values
+        (#{boardId},#{title},#{content},#{categoryId},#{userId},#{noticeLevel})
     </insert>
 
-    <select id="selectBoards" resultType="BoardDto">
+    <select id="selectBoards" resultType="BoardDto" resultMap="boardResultMap">
         select * from board;
     </select>
 
+    <select id="selectBoard" resultType="BoardDto" resultMap="boardResultMap">
+        select * from board
+        where board_id=#{boardId};
+    </select>
+
     <update id="updateBoardOne">
-        update board set title=#{title}, description=#{description}
-        where id=#{id}
+        update board set title=#{title}, content=#{content}, update_date=#{updateDate}
+        where board_id=#{boardId}
     </update>
 
     <update id="deleteBoardOne">
         update board set deleted=true
-        where id=#{boardId}
+        where board_id=#{boardId}
     </update>
 
 </mapper>

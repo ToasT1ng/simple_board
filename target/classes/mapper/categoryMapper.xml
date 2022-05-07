@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.notice_board.CategoryMapper">
+    <resultMap type="CategoryDto" id="categoryResultMap">
+        <result property="categoryId" column="category_id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="orderNumber" column="order_number"/>
+        <result property="categoryName" column="category_name"/>
+        <result property="categoryUserLevel" column="category_user_level"/>
+    </resultMap>
+
+    <insert id="insertCategoryOne">
+        insert into category(category_id,parent_id,order_number,category_name,description,category_user_level) values
+        (#{categoryId},#{parentId},#{orderNumber},#{categoryName},#{description},#{categoryUserLevel})
+    </insert>
+
+    <select id="selectCategories" resultType="CategoryDto" resultMap="categoryResultMap">
+        select * from category;
+    </select>
+
+    <select id="selectCategory" resultType="CategoryDto" resultMap="categoryResultMap">
+        select * from category
+        where category_id=#{categoryId};
+    </select>
+
+    <update id="updateCategoryOne">
+        update category set parent_id=#{parentId}, order_number=#{orderNumber}, category_name=#{categoryName}, description=#{description}, category_user_level=#{categoryUserLevel}
+        where category_id=#{categoryId}
+    </update>
+
+    <update id="deleteCategoryOne">
+        update category set deleted=true
+        where category_id=#{categoryId}
+    </update>
+
+</mapper>
